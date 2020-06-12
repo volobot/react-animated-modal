@@ -3,8 +3,8 @@ import "./Modal.css";
 import { CSSTransition } from "react-transition-group";
 
 export default class Modal extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             animateOverlay: false,
             animateBody: false
@@ -50,7 +50,7 @@ export default class Modal extends React.Component {
     }
     render() {
         let { animateOverlay, animateBody } = this.state;
-        let { visible } = this.props;
+        let { visible,styles } = this.props;
         let type = undefined;
         if (this.props.type !== undefined) {
             type = this.props.type;
@@ -58,7 +58,7 @@ export default class Modal extends React.Component {
         if (visible) {
             return (
                 <React.Fragment>
-                    <div className="react-modal">
+                    <div className="react-modal" style={{styles}}>
                         <CSSTransition
                             in={animateOverlay}
                             timeout={500}
@@ -67,11 +67,6 @@ export default class Modal extends React.Component {
                             <div
                                 className="react-modal-overlay"
                                 onClick={() =>
-                                    // this.setState({ animate: false }, () => {
-                                    //     setTimeout(() => {
-                                    //         this.props.closemodal();
-                                    //     }, 500);
-                                    // })
                                     this.setState(
                                         { animateBody: false },
                                         () => {
